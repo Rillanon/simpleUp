@@ -37,8 +37,11 @@ class ParseService:
 
     def get_credential(self):
         if self.credential.empty() is False:
+            print "credentials found"
             return self.credential
         else:
             print "empty credential"
+
+
 
 
