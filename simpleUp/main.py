@@ -1,14 +1,14 @@
-__author__ = 'ima'
-import npyscreen
+from cement.core import foundation
 
-class SimpleUp(npyscreen.NPSApp):
-    def main(self):
-        F = npyscreen.Form(name="simpleUP - simple utility")
-        F.edit()
-if __name__ == "__main__":
-    App = SimpleUp()
-    App.run()
-
+app = foundation.CementApp('simpleUp')
+try:
+    app.setup()
+    app.run()
+    print "simple so simple..."
+except:
+    app.close(1)
+finally:
+    app.close(0)
 
 
 
