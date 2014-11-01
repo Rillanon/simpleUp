@@ -12,6 +12,13 @@ class LogOnInfo:
         else:
             return False
 
+class ClipBoardService:
+    def __init__(self):
+        self.clip_board_text = None
+    def get_clipboard_text(self):
+        from Tkinter import Tk
+        self.clip_board_text = Tk().clipboard_get()
+        return self.clip_board_text
 
 class ParseService:
     def __init__(self):
