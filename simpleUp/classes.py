@@ -15,6 +15,7 @@ class LogOnInfo:
 class ClipBoardService:
     def __init__(self):
         self.clip_board_text = None
+
     def get_clipboard_text(self):
         from Tkinter import Tk
         self.clip_board_text = Tk().clipboard_get()
@@ -40,14 +41,14 @@ class ParseService:
                     self.credential.password = n.group(3)
                     self.credential.host = n.group(1)
             except AttributeError:
-                print "No credentials found"
+                self.credential = None
 
     def get_credential(self):
-        if self.credential.empty() is False:
-            print "credentials found"
+        if self.credential.empty() is True:
             return self.credential
         else:
-            print "empty credential"
+            print "no credentials found"
+
 
 
 
