@@ -24,28 +24,35 @@ class ClipBoardService:
 class ParseService:
     def __init__(self):
         self.credential = LogOnInfo()
+        self.credential_found = None
 
     def parse(self, cb_string):
         import re
         try:
-            m = re.search('ftp://(.+?)\+(.+?)@(.+?)', cb_string)
+            m = re.search("((ftp://)(.+):(.+)@(.+))", cb_string)
+            n = re.search('FTP Server: (.+?)\n Username: (.+?)\n Password: (.+?)\n', cb_string)
             if m:
-                self.credential.username = m.group(1)
-                self.credential.password = m.group(2)
-                self.credential.host = m.group(3)
+                self.credential.username = m.group(3)
+                self.credential.password = m.group(4)
+                self.credential.host = m.group(5)
+                self.credential_found = True
+                return True
+            elif n:
+                self.credential.username = n.group(2)
+                self.credential.password = n.group(3)
+                self.credential.host = n.group(1)
+                self.credential_found = True
+                return True
+            else:
+                return False
+
         except AttributeError:
-            try:
-                n = re.search('FTP Server: (.+?)\n Username: (.+?)\n Password: (.+?)\n', cb_string)
-                if n:
-                    self.credential.username = n.group(2)
-                    self.credential.password = n.group(3)
-                    self.credential.host = n.group(1)
-            except AttributeError:
-                self.credential = None
+            self.credential_found = False
+            return False
 
     def get_credential(self):
-        if self.credential.empty() is True:
-            return self.credential
+        if self.credential.empty() is False:
+            print self.credential.username
         else:
             print "no credentials found"
 

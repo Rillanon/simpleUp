@@ -1,5 +1,5 @@
 from cement.core import foundation
-from simpleUp import classes
+import classes
 
 app = foundation.CementApp('simpleUp')
 ps = classes.ParseService()
