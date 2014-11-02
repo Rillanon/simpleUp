@@ -1,5 +1,4 @@
 import entities
-import ftplib
 
 
 class ClipBoardService:
@@ -52,6 +51,7 @@ class ParseService:
 
 
 class FTPService:
+
     def __init__(self):
         self.credential = entities.AuthInfo()
         self.session = None
@@ -65,15 +65,29 @@ class FTPService:
         self.file_path = file_path
 
     def upload(self):
+        import ftplib
+        import datetime
         self.session = ftplib.FTP(self.credential.host,
                                   self.credential.username,
                                   self.credential.password)
 
         self.file = open(self.file_path, "rb")
 
-        self.session.storbinary(self.file_path, self.file)
+        # saves to the ftp host using current date time as filename
+        self.session.storbinary(datetime.datetime.now() + ".zip", self.file)
 
         self.session.quit()
+
+
+class FileService:
+    def __init__(self):
+        import win32com.client
+        cls_id = '{9BA05972-F6A8-11CF-A442-00A0C90A8F39}'
+        shell_windows=win32com.client.Dispatch(cls_id)
+        for i in range(shell_windows.Count):
+            print shell_windows[i].LocationURL
+            for j in range(shell_windows[i].Document.SelectedItems().Count):
+                print '  ', shell_windows[i].Document.SelectedItems().Item(j).Path
 
 
 

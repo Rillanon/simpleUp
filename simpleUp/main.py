@@ -8,6 +8,7 @@ cs = services.ClipBoardService()
 try:
     app.setup()
     app.run()
+    services.FileService()
     ps.parse(cs.get_clipboard_text())
     ps.get_credential()
 
