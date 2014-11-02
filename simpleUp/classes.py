@@ -29,6 +29,7 @@ class ParseService:
     def parse(self, cb_string):
         import re
         try:
+            #regex to get the host/user/pass for the ftp host
             m = re.search("((ftp://)(.+):(.+)@(.+))", cb_string)
             n = re.search('FTP Server: (.+?)\n Username: (.+?)\n Password: (.+?)\n', cb_string)
             if m:
