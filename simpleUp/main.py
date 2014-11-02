@@ -1,9 +1,9 @@
 from cement.core import foundation
-import classes
+import services
 
 app = foundation.CementApp('simpleUp')
-ps = classes.ParseService()
-cs = classes.ClipBoardService()
+ps = services.ParseService()
+cs = services.ClipBoardService()
 
 try:
     app.setup()
