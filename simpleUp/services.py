@@ -81,13 +81,30 @@ class FTPService:
 
 class FileService:
     def __init__(self):
+        self.file_path = []
+
+    #get the file path of selected files/directories in OS file manager, atm only windows is implemented
+    @staticmethod
+    def set_selected_files(self):
         import win32com.client
-        cls_id = '{9BA05972-F6A8-11CF-A442-00A0C90A8F39}'
-        shell_windows=win32com.client.Dispatch(cls_id)
-        for i in range(shell_windows.Count):
-            print shell_windows[i].LocationURL
-            for j in range(shell_windows[i].Document.SelectedItems().Count):
-                print '  ', shell_windows[i].Document.SelectedItems().Item(j).Path
+        import os
+
+        if os.name == 'nt':
+            cls_id = '{9BA05972-F6A8-11CF-A442-00A0C90A8F39}'
+            shell_windows = win32com.client.Dispatch(cls_id)
+            for i in range(shell_windows.Count):
+                for j in range(shell_windows[i].Document.SelectedItems().Count):
+                    #print '  ', shell_windows[i].Document.SelectedItems().Item(j).Path
+                    self.file_path.append(shell_windows[i].Document.SelectedItems().Item(j).Path)
+        else:
+            print "Your OS is not supported by this script!"
+
+    def get_selected_files(self):
+        self.set_selected_files()
+        for current_file_name in self.file_path:
+            print file
+
+
 
 
 
