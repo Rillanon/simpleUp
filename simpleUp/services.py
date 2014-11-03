@@ -99,26 +99,26 @@ class FilePathService:
             print "Your OS is not supported by this script!"
 
     def get_selected_files(self):
-        self.set_selected_files()
-        for current_file_name in self.file_path:
-            print current_file_name
+        return self.file_path
 
 
 class FileCompressService:
     def __init__(self):
-        self.temp_file = None
+        self.temp_file_name = None
 
     @staticmethod
     def compress(self, files):
         import zipfile
         import datetime
-        zf = zipfile.ZipFile(datetime.datetime.now() + ".zip", 'w')
+        self.temp_file_name = datetime.datetime.now().strftime() + ".zip"
+        zf = zipfile.ZipFile(self.temp_file_name, 'w')
         try:
             for current_file in files:
                 zf.write(current_file)
         except IOError:
             print "can not compress. something wrong"
         finally:
+            return self.temp_file_name
             zf.close()
 
 
