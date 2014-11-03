@@ -79,12 +79,11 @@ class FTPService:
         self.session.quit()
 
 
-class FileService:
+class FilePathService:
     def __init__(self):
         self.file_path = []
 
     #get the file path of selected files/directories in OS file manager, atm only windows is implemented
-    @staticmethod
     def set_selected_files(self):
         import win32com.client
         import os
@@ -102,7 +101,27 @@ class FileService:
     def get_selected_files(self):
         self.set_selected_files()
         for current_file_name in self.file_path:
-            print file
+            print current_file_name
+
+
+class FileCompressService:
+    def __init__(self):
+        self.temp_file = None
+
+    @staticmethod
+    def compress(self, files):
+        import zipfile
+        import datetime
+        zf = zipfile.ZipFile(datetime.datetime.now() + ".zip", 'w')
+        try:
+            for current_file in files:
+                zf.write(current_file)
+        except IOError:
+            print "can not compress. something wrong"
+        finally:
+            zf.close()
+
+
 
 
 
