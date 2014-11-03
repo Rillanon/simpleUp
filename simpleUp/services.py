@@ -110,7 +110,8 @@ class FileCompressService:
     def compress(self, files):
         import zipfile
         import datetime
-        self.temp_file_name = datetime.datetime.now().strftime() + ".zip"
+        import os
+        self.temp_file_name = os.getcwd() + "\\" + datetime.datetime.now().strftime('%f') + ".zip"
         zf = zipfile.ZipFile(self.temp_file_name, 'w')
         try:
             for current_file in files:

@@ -2,11 +2,12 @@ from distutils.core import setup
 
 setup(
     name='simpleUp',
-    version='',
+    version='TBA',
     packages=['simpleUp'],
-    url='',
-    license='',
+    url='None',
+    license='open source',
     author='Ian Ma',
-    author_email='',
-    description=''
+    author_email='yma8000@gmail.com',
+    description='simple utility to add ftp upload feature to windows explorer context menu'
 )
+
