@@ -74,7 +74,7 @@ class FTPService:
         self.file = open(self.file_path, "rb")
 
         # saves to the ftp host using current date time as filename
-        self.session.storbinary(datetime.datetime.now() + ".zip", self.file)
+        self.session.storbinary(datetime.datetime.now() + '.zip', self.file)
 
         self.session.quit()
 
@@ -96,7 +96,7 @@ class FilePathService:
                     #print '  ', shell_windows[i].Document.SelectedItems().Item(j).Path
                     self.file_path.append(shell_windows[i].Document.SelectedItems().Item(j).Path)
         else:
-            print "Your OS is not supported by this script!"
+            print 'Your OS is not supported by this script!'
 
     def get_selected_files(self):
         return self.file_path
@@ -117,10 +117,11 @@ class FileCompressService:
             for current_file in files:
                 zf.write(current_file)
         except IOError:
-            print "can not compress. something wrong"
+            print "can not compress. something wrong, check if your drive is full"
         finally:
-            return self.temp_file_name
             zf.close()
+            return self.temp_file_name
+
 
 
 
